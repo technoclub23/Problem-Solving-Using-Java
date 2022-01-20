@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        HashSet<String> set = new HashSet<>();
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j] != '.')
+                {
+                    String dRow = "row"+i+"val"+board[i][j];
+                    String dCol = "col"+j+"val"+board[i][j];
+                    int rQuad = i-(i%3);
+                    int cQuad = j-(j%3);
+                    String dQuad = ""+rQuad+cQuad+board[i][j];
+                    if(!set.add(dRow) || !set.add(dCol) || !set.add(dQuad))
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
