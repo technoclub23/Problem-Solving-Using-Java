@@ -1,0 +1,26 @@
+class Solution {
+    private void solve(int i,ArrayList<Integer> arr,boolean[] vis,int[] nums,HashSet<ArrayList<Integer>> set){
+        if(arr.size()==nums.length){
+            set.add(new ArrayList<>(arr));
+            return;
+        }
+        for(int j=0;j<nums.length;j++){
+            if(!vis[j]){
+                vis[j]=true;
+                arr.add(nums[j]);
+                solve(j,arr,vis,nums,set);
+                arr.remove(arr.size()-1);
+                vis[j]=false;
+            }
+        }
+    }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        boolean[] vis=new boolean[nums.length];
+        Arrays.fill(vis,false);
+        
+        HashSet<ArrayList<Integer>> set=new HashSet<>();
+        solve(0,new ArrayList<>(),vis,nums,set);
+        List<List<Integer>> list=new ArrayList<>(set);
+        return list;
+    }
+}
