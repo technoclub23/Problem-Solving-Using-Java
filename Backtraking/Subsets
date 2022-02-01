@@ -1,0 +1,25 @@
+class Solution {
+   void findsubsets(int[] nums, int currentIndex, List<Integer> currentSet, List<List<Integer>> output) {
+
+        if (currentIndex == nums.length) {
+            output.add(new ArrayList<>(currentSet));
+            return;
+        }
+        //pick element
+        int currentVal = nums[currentIndex];
+        currentSet.add(currentVal);
+        findsubsets(nums, currentIndex + 1, currentSet, output);
+        //remove the last element to go previous stage(Backtrack)
+        currentSet.remove(currentSet.size() - 1);
+        //current element not in subsequence (not pick)
+        findsubsets(nums, currentIndex + 1, currentSet, output);
+        return;
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> output = new ArrayList<>();
+        List<Integer> currentSet = new ArrayList<>();
+        findsubsets(nums, 0, currentSet, output);
+        return output;
+    }
+}
