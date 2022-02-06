@@ -1,0 +1,26 @@
+class Solution {
+    public String reverseWords(String s) {
+        
+        StringBuilder res = new StringBuilder();
+        StringBuilder cur = new StringBuilder();
+        int N = s.length();
+        
+        for(int i=N-1;i>=0;i--)
+        {
+            cur.setLength(0);
+            while(i>=0 && s.charAt(i) != ' ')
+            {
+                cur.append(s.charAt(i));
+                i--;
+            }
+            if(cur.length() > 0)
+            {
+                res.append(res.length() == 0 ? "":" ");
+                res.append(cur.reverse().toString());
+            }
+        }
+        return res.toString();
+        
+        
+    }
+}
