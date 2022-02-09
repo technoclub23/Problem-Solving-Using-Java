@@ -1,0 +1,48 @@
+class Solution {
+    public void solveSudoku(char[][] board) {
+        var rowSeen = new boolean[9][9];
+        var colSeen = new boolean[9][9]; 
+        var squareSeen = new boolean[3][3][9];
+        var emptyCells = new ArrayList<int[]>();
+        
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                if (board[r][c] == '.') {
+                    emptyCells.add(new int[] { r, c });
+                } else {
+                    var valIdx = Character.getNumericValue(board[r][c]) - 1;
+                    rowSeen[r][valIdx] = true;
+                    colSeen[c][valIdx] = true;
+                    squareSeen[r / 3][c / 3][valIdx] = true;                    
+                }
+            }
+        }                
+        
+        backtrack(0, board, emptyCells, rowSeen, colSeen, squareSeen);
+    }
+    
+    boolean backtrack(int idx, char[][] board, List<int[]> emptyCells,
+                      boolean[][] rowSeen, boolean[][] colSeen, boolean[][][] squareSeen) {
+        if (idx == emptyCells.size())
+            return true;
+
+        var r = emptyCells.get(idx)[0];
+        var c = emptyCells.get(idx)[1];
+        
+        var sr = r / 3;
+        var sc = c / 3;
+
+        for (int v = 0; v < 9; v++) {
+            if (!rowSeen[r][v] && !colSeen[c][v] && !squareSeen[sr][sc][v]) {
+                rowSeen[r][v] = colSeen[c][v] = squareSeen[sr][sc][v] = true;                    
+                if (backtrack(idx + 1, board, emptyCells, rowSeen, colSeen, squareSeen)) {
+                    board[r][c] = Character.forDigit(v + 1, 10);
+                    return true;
+                }
+                rowSeen[r][v] = colSeen[c][v] = squareSeen[sr][sc][v] = false;                    
+            }
+        }
+        
+        return false;
+    }
+}
