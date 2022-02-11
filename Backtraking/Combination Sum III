@@ -1,0 +1,34 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        
+        List<List<Integer>> ans = new ArrayList<>() ;
+        List<Integer> currL = new ArrayList<>() ;
+        
+        helper(1 , k , n , 0 , ans , currL);
+        return ans ;
+        
+    }
+    
+    public void helper(int i , int k , int n , int currSum, List<List<Integer>> ans , List<Integer> currL) {
+        
+        if(i > 10 || currSum > n) {
+            return ;
+        }
+               
+        if(currSum  == n && currL.size() == k) {
+            ans.add(new ArrayList<>(currL)) ;
+            return ;
+        }
+        
+        currL.add(i) ;
+       
+        helper(i + 1 , k , n , currSum + i , ans , currL);
+        
+        currL.remove(currL.size() - 1) ;
+        
+        helper(i + 1 , k , n , currSum , ans , currL);       
+
+        return ;
+        
+    }
+}
