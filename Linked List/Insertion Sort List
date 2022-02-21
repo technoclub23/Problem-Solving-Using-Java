@@ -1,0 +1,19 @@
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        
+        for(ListNode i=head;i!=null;i=i.next)
+        {
+            for(ListNode j=i.next;j!=null;j=j.next)
+            {
+                if(j.val < i.val)
+                {
+                    int temp = j.val;
+                    j.val = i.val;
+                    i.val = temp;
+                }
+            }
+        }
+        return head;
+            
+    }
+}
