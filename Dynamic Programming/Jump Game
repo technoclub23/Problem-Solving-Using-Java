@@ -1,0 +1,18 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        boolean possible[] = new boolean[nums.length];
+        possible[nums.length-1] = true;
+        for(int i = nums.length-2;i>=0;i--)
+        {
+            for(int k=0;k<=nums[i];k++)
+            {
+                if(possible[i+k] == true)
+                {
+                    possible[i] = true;
+                    break;
+                }
+            }
+        }
+        return possible[0];
+    }
+}
