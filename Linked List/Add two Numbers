@@ -31,11 +31,12 @@ class Solution {
         p = p.next;
     }
  
-    //don't forget check the carry value at the end
+    
     if(carry > 0){
         ListNode l = new ListNode(carry);
         p.next = l;
     }
-    return temp.next;
+    return temp.next; 
     }
+
 }
