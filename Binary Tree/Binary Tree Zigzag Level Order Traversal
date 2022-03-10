@@ -1,0 +1,38 @@
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+         List<List<Integer>> list = new ArrayList<>(); // to store the answer 
+        if(root == null)  // check initial condition 
+            return list;
+        
+        Queue<TreeNode> queue = new LinkedList<>(); // to store the nodes form top to bottom 
+        
+        int flag = 0;   // this flag is used for zig zag answer 
+        
+        queue.offer(root); // inserting the root in the queue
+        
+        while(!queue.isEmpty()){
+            
+            int level = queue.size(); 
+            
+            List<Integer> ans = new ArrayList<>(); // to store the sub array values for list 
+            for(int i=0 ; i<level;i++){
+                TreeNode node = queue.poll();  // poping the peek element of the queue
+                if(node.left != null)
+                    queue.offer(node.left);  // if its left node present store it in queue
+                if(node.right != null)
+                    queue.offer(node.right);  // if its right node present store it in queue
+                
+                ans.add(node.val);  // store the current val of the node in ans arraylist
+            }
+            if(flag != 0){
+                flag =0;
+               Collections.reverse(ans); 
+            } 
+            else
+                flag = 1;
+            list.add(ans); // add ans list to final list
+            
+        }
+        return list;
+    }
+}
