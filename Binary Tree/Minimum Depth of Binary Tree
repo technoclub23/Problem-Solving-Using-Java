@@ -1,0 +1,21 @@
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null)
+        {
+            return 0;
+        }
+        else
+        {
+            int left_subtree = minDepth(root.left);
+            int right_subtree = minDepth(root.right);
+            if(left_subtree == 0 || right_subtree == 0)
+            {
+                return 1 + Math.max(left_subtree,right_subtree);
+            }
+            else
+            {
+                return 1 + Math.min(left_subtree,right_subtree);
+            }
+        }
+    }
+}
