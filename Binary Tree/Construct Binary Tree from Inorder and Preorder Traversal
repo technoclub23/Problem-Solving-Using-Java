@@ -24,4 +24,5 @@ class Solution {
         root.right = arrayToTree(preorder,inorderIndexMap.get(rootValue)+1,right);
         return root;
     }
+    
 }
